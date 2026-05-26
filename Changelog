@@ -12,3 +12,6 @@ Started after the initial release; changelog only displays changes after creatin
 (26.05.26, 18:28)
 -changed the UI a bit, now to fit more buttons
 -added a Issue report and github repo button
+
+(26.05.26, 18:38)
+-moved the buttons to be aligned
