@@ -15,3 +15,7 @@ Started after the initial release; changelog only displays changes after creatin
 
 (26.05.26, 18:38)
 -moved the buttons to be aligned
+
+(29.05.26, 21:47)
+-Fixed a bug: Dynamic stretching was broken on ios, switched to fixed aspect ratio
+-Renamed Pictures
