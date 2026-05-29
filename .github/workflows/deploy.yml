@@ -20,18 +20,18 @@ jobs:
         with:
           node-version: '22'
 
-      # Schritt 1: Wir installieren den originalen Packager global auf dem Server
-      - name: Install TurboWarp Packager
-        run: npm install -g @turbowarp/packager
+      # Schritt 1: Wir installieren den Packager lokal im Projektordner
+      - name: Install TurboWarp Packager (Local)
+        run: npm install @turbowarp/packager
 
-      # Schritt 2: Jetzt bauen wir das Spiel mit deiner Custom Extension
+      # Schritt 2: Wir bauen das Spiel
       - name: Build Game (With Custom Extension Code)
         run: |
           # Wir schreiben den Extension-Code aus den Secrets in eine Datei
           echo "${{ secrets.CUSTOM_EXTENSION_DATA }}" > extension.js
 
-          # Da es jetzt global installiert ist, rufen wir es einfach direkt auf
-          tw-packager Hasan-Gambling.sb3 \
+          # Über 'npx' rufen wir das lokal installierte Paket direkt auf
+          npx tw-packager Hasan-Gambling.sb3 \
             --output dist/index.html \
             --target web \
             --assets-dir assets \
