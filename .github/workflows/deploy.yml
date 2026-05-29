@@ -1,0 +1,38 @@
+name: Build and Deploy TurboWarp Game
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install TurboWarp Packager
+        run: npm install -g @turbowarp/packager
+
+      - name: Build Game (Splitted & Compressed)
+        run: |
+          tw-packager Hasan-Gambling.sb3 \
+            --output dist/index.html \
+            --target web \
+            --assets-dir assets \
+            --compress
+
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: dist
+          branch: gh-pages
