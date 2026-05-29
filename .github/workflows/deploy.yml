@@ -20,20 +20,22 @@ jobs:
         with:
           node-version: '22'
 
+       Tar-Build mit mehreren einzelnen Extensions
       - name: Build Standalone Game
         run: |
-          # 1. Erstelle den Zielordner
           mkdir -p dist
 
-          # 2. Schreibe den Extension-Code aus den Secrets in eine JavaScript-Datei
-          echo "${{ secrets.CUSTOM_EXTENSION_DATA }}" > extension.js
+          # 1. Hier schreiben wir jede Extension in ihre eigene Datei
+          echo "${{ secrets.AUDIO_EXTENSION }}" > audio.js
+          echo "${{ secrets.GRAPHICS_EXTENSION }}" > graphics.js
+          echo "${{ secrets.MULTIPLAYER_EXTENSION }}" > multiplayer.js
 
-          # 3. Baue das Spiel mit dem offiziellen Paket über die sichere npx-Syntax
+          # 2. Wir übergeben die Dateien als kommagetrennte Liste an --custom-js
           npx --package=@turbowarp/packager tw-packager Hasan-Gambling.sb3 \
             --output dist/index.html \
             --target web \
             --compress \
-            --custom-js extension.js
+            --custom-js audio.js,graphics.js,multiplayer.js
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
