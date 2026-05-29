@@ -22,8 +22,8 @@ jobs:
 
       - name: Build Game (Splitted & Compressed)
         run: |
-          # Wir nutzen das exakte Automatisierungs-Tool für GitHub Actions
-          npx -y turbowarp-packager-cli -i Hasan-Gambling.sb3 -o dist
+          # --stack sorgt dafür, dass die index.html direkt im Hauptordner landet
+          npx -y turbowarp-packager-cli -i Hasan-Gambling.sb3 -o dist --stack
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
