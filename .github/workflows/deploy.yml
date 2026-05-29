@@ -22,11 +22,11 @@ jobs:
 
       - name: Build Game (With Custom Extension Code)
         run: |
-          # Wir schreiben das Secret temporär in eine .js Datei, damit tw-packager es lesen kann
+          # Wir schreiben den Extension-Code aus den Secrets in eine temporäre Datei
           echo "${{ secrets.CUSTOM_EXTENSION_DATA }}" > extension.js
 
-          # Über --custom-js binden wir den Erweiterungscode sauber in das fertige Spiel ein
-          npx -y --package @turbowarp/packager tw-packager Hasan-Gambling.sb3 \
+          # Richtige npx-Syntax: Erst das Paket laden, dann mit -c den Befehl ausführen
+          npx -y -p @turbowarp/packager npx tw-packager Hasan-Gambling.sb3 \
             --output dist/index.html \
             --target web \
             --assets-dir assets \
