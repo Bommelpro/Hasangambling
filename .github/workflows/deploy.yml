@@ -22,8 +22,8 @@ jobs:
 
       - name: Build Game (Splitted & Compressed)
         run: |
-          # Wir nutzen hier direkt das offizielle CLI-Paket von TurboWarp
-          npx -y @turbowarp/packager-cli Hasan-Gambling.sb3 \
+          # --package lädt das Paket, tw-packager führt es aus
+          npx -y --package @turbowarp/packager tw-packager Hasan-Gambling.sb3 \
             --output dist/index.html \
             --target web \
             --assets-dir assets \
