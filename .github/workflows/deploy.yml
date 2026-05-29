@@ -22,12 +22,8 @@ jobs:
 
       - name: Build Game (Splitted & Compressed)
         run: |
-          # --package lädt das Paket, tw-packager führt es aus
-          npx -y --package @turbowarp/packager tw-packager Hasan-Gambling.sb3 \
-            --output dist/index.html \
-            --target web \
-            --assets-dir assets \
-            --compress
+          # Wir nutzen das exakte Automatisierungs-Tool für GitHub Actions
+          npx -y turbowarp-packager-cli -i Hasan-Gambling.sb3 -o dist
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
