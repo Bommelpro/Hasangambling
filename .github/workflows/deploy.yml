@@ -20,15 +20,18 @@ jobs:
         with:
           node-version: '22'
 
-      - name: Build Game (With Custom Extension)
+      - name: Build Game (With Custom Extension Code)
         run: |
-          # Wir nutzen den Haupt-Packager, der extensions über '--extension' voll unterstützt
+          # Wir schreiben das Secret temporär in eine .js Datei, damit tw-packager es lesen kann
+          echo "${{ secrets.CUSTOM_EXTENSION_DATA }}" > extension.js
+
+          # Über --custom-js binden wir den Erweiterungscode sauber in das fertige Spiel ein
           npx -y --package @turbowarp/packager tw-packager Hasan-Gambling.sb3 \
             --output dist/index.html \
             --target web \
             --assets-dir assets \
             --compress \
-            --extension "${{ secrets.CUSTOM_EXTENSION_DATA }}"
+            --custom-js extension.js
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
