@@ -22,10 +22,12 @@ jobs:
 
       - name: Build Game (With Custom Extension)
         run: |
-          # Wir übergeben deine Extension als Text-URL direkt an den Packager
-          npx -y turbowarp-packager-cli \
-            -i Hasan-Gambling.sb3 \
-            -o dist \
+          # Wir nutzen den Haupt-Packager, der extensions über '--extension' voll unterstützt
+          npx -y --package @turbowarp/packager tw-packager Hasan-Gambling.sb3 \
+            --output dist/index.html \
+            --target web \
+            --assets-dir assets \
+            --compress \
             --extension "${{ secrets.CUSTOM_EXTENSION_DATA }}"
 
       - name: Deploy to GitHub Pages
