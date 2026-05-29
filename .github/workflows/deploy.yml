@@ -20,13 +20,16 @@ jobs:
         with:
           node-version: '22'
 
-      - name: Build Game (Splitted & Compressed)
+      - name: Build Game (With Custom Extension)
         run: |
-          # Ganz normal ohne falsche Optionen bauen
-          npx -y turbowarp-packager-cli -i Hasan-Gambling.sb3 -o dist
+          # Wir übergeben deine Extension als Text-URL direkt an den Packager
+          npx -y turbowarp-packager-cli \
+            -i Hasan-Gambling.sb3 \
+            -o dist \
+            --extension "${{ secrets.CUSTOM_EXTENSION_DATA }}"
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: dist # Lädt den Inhalt von dist direkt ins Hauptverzeichnis hoch
+          folder: dist
           branch: gh-pages
