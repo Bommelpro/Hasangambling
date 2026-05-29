@@ -22,11 +22,11 @@ jobs:
 
       - name: Build Game (Splitted & Compressed)
         run: |
-          # --stack sorgt dafür, dass die index.html direkt im Hauptordner landet
-          npx -y turbowarp-packager-cli -i Hasan-Gambling.sb3 -o dist --stack
+          # Ganz normal ohne falsche Optionen bauen
+          npx -y turbowarp-packager-cli -i Hasan-Gambling.sb3 -o dist
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: dist
+          folder: dist # Lädt den Inhalt von dist direkt ins Hauptverzeichnis hoch
           branch: gh-pages
