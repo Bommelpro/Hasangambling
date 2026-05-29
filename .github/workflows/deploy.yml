@@ -20,23 +20,13 @@ jobs:
         with:
           node-version: '22'
 
-      # SCHRITT 1: Wir installieren das Paket lokal
-      - name: Install TurboWarp Packager (Local)
-        run: npm install @turbowarp/packager
-
-      # SCHRITT 2: Wir bauen das Spiel
-      - name: Build Game (With Custom Extension Code)
+      - name: Build Game (With Custom Extension)
         run: |
-          # Wir schreiben den Extension-Code aus den Secrets in eine Datei
-          echo "${{ secrets.CUSTOM_EXTENSION_DATA }}" > extension.js
-
-          # Direkter Pfad zur Datei – kein npx, keine Internet-Suche, kein 404 mehr!
-          ./node_modules/.bin/tw-packager Hasan-Gambling.sb3 \
-            --output dist/index.html \
-            --target web \
-            --assets-dir assets \
-            --compress \
-            --custom-js extension.js
+          # Wir übergeben deine Extension als Text-URL direkt an den Packager
+          npx -y turbowarp-packager-cli \
+            -i Hasan-Gambling.sb3 \
+            -o dist \
+            --extension "${{ secrets.CUSTOM_EXTENSION_DATA }}"
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
