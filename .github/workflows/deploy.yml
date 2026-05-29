@@ -18,13 +18,12 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22' # Auf die modernste Version aktualisiert
-
-      # Das explizite Installieren fällt weg, npx erledigt das gleich mit!
+          node-version: '22'
 
       - name: Build Game (Splitted & Compressed)
         run: |
-          npx @turbowarp/packager Hasan-Gambling.sb3 \
+          # Wir nutzen hier direkt das offizielle CLI-Paket von TurboWarp
+          npx -y @turbowarp/packager-cli Hasan-Gambling.sb3 \
             --output dist/index.html \
             --target web \
             --assets-dir assets \
