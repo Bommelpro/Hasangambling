@@ -20,7 +20,7 @@ jobs:
         with:
           node-version: '22'
 
-      # SCHRITT 1: Wir installieren das RICHTIGE Paket lokal
+      # SCHRITT 1: Wir installieren das Paket lokal
       - name: Install TurboWarp Packager (Local)
         run: npm install @turbowarp/packager
 
@@ -30,8 +30,8 @@ jobs:
           # Wir schreiben den Extension-Code aus den Secrets in eine Datei
           echo "${{ secrets.CUSTOM_EXTENSION_DATA }}" > extension.js
 
-          # npx findet den Befehl 'tw-packager' jetzt im lokal installierten Paket
-          npx tw-packager Hasan-Gambling.sb3 \
+          # Direkter Pfad zur Datei – kein npx, keine Internet-Suche, kein 404 mehr!
+          ./node_modules/.bin/tw-packager Hasan-Gambling.sb3 \
             --output dist/index.html \
             --target web \
             --assets-dir assets \
