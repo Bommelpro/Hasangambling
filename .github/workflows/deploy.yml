@@ -18,14 +18,13 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22' # Auf die modernste Version aktualisiert
 
-      - name: Install TurboWarp Packager
-        run: npm install -g @turbowarp/packager
+      # Das explizite Installieren fällt weg, npx erledigt das gleich mit!
 
       - name: Build Game (Splitted & Compressed)
         run: |
-          tw-packager Hasan-Gambling.sb3 \
+          npx @turbowarp/packager Hasan-Gambling.sb3 \
             --output dist/index.html \
             --target web \
             --assets-dir assets \
