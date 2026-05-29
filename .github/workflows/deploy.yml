@@ -20,13 +20,20 @@ jobs:
         with:
           node-version: '22'
 
-      - name: Build Game (With Custom Extension)
+      - name: Build Standalone Game
         run: |
-          # Wir übergeben deine Extension als Text-URL direkt an den Packager
-          npx -y turbowarp-packager-cli \
-            -i Hasan-Gambling.sb3 \
-            -o dist \
-            --extension "${{ secrets.CUSTOM_EXTENSION_DATA }}"
+          # 1. Erstelle den Zielordner
+          mkdir -p dist
+
+          # 2. Schreibe den Extension-Code aus den Secrets in eine JavaScript-Datei
+          echo "${{ secrets.CUSTOM_EXTENSION_DATA }}" > extension.js
+
+          # 3. Baue das Spiel mit dem offiziellen Paket über die sichere npx-Syntax
+          npx --package=@turbowarp/packager tw-packager Hasan-Gambling.sb3 \
+            --output dist/index.html \
+            --target web \
+            --compress \
+            --custom-js extension.js
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
