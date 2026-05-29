@@ -20,3 +20,9 @@ Started after the initial release; changelog only displays changes after creatin
 -Fixed a bug: Dynamic stretching was broken on ios, switched to fixed aspect ratio
 -Renamed Pictures
 -Fixed opening sound stuttering due to the sound looping
+
+(30.05.26, 01:04)
+-Added Raipeniser as a new bet
+-added 2 images for liam and 1 for elvis for balancing, all choices have the same amount of pictures now
+-removed the issue report button, repo button stays
+-removed the 67 easter egg
